@@ -1,0 +1,70 @@
+page d'acceuil
+
+champs pour changer son nom : de base avec un nom aleatoire de hero du jeu
+langue de preference (anglais et francais ca sera deja bien mdr, voir avec une traduction automatique sinon)
+
+creer une partie : permet de configurer les options de jeu : activer/desactiver des extensions (druide & bretteurs,
+berserkers & necromanciens, sorcerer, monster expansion, kick starter, here to slaigh), nombre de joueurs,
+variation (normal, equipe, 2 leader chacun), conditions de victoire (nombre de monstre tué, nombre de heros, cap par categorie)
+parametre avancé : changer la frequence d'aparition des combinaisons du des, desactiver individuellement des cartes,
+modifier les effets des cartes, nombre de force reroll
+
+rejoindre la partie les joueurs peuvent rentrer une ip (detection automatique de l'existence d'une partie?)
+les joueurs arrivent alors sur un hub contenant des cartes leaders de dos et est assigné a l'un d'eux
+une surbrillance aparait alors et le nom du joueur s'affihe en dessous
+lorsque tous les joueurs sont la, ou que l'hote force le debut de la partie (exclus tous les superflus), ou que l'hote
+a mis une ia pour controller les joueurs les leaders sont reveles. chaque joueurs peut forcer le reroll de n'importe
+quel leader, le sien compris, une fois (nombre modifiable dans les parametre de partis) (hote en a en illimité)
+
+probleme de connexion : si un joueur perd sa connexion la partie continue tout de meme jusqua son tour et la
+on attend qu'il se reconnecte
+l'hote peut l'exclure de la partie et le cours du jeu reprends comme avant
+si l'hote perd la connexion, les joueurs en sont notifié, et ils doivent attendre jusqu'a ce qu'il se reconnecte
+
+possibilité de charger une partie sauvegarder auparavant
+lorsque les joueurs tente de se connecter a une partie qui a deja ete cree ils voient les leader revele et
+choisissent celui qu'ils incarnaient a la session precedante (ou un autre c'est pas comme si je pouvais verifier mdr)
+l'hote peut toujours exclure ou remplacer par des ia les joueurs manquants
+la partie reprend dans le meme etat qu'elle a ete quitter, sauvegarde automatique au debut du tour de chaque joueur
+
+permettre la sauvegarde d'une partie, lorsque l'hote decide de quitter la partie, elle est automatiquement sauvegardé et
+tous les joueurs sont notifié et ramené a l'ecran d'accueil
+
+en jeu possibilité d'alterner entre une vision d'ensemble avec un recapitulatif de l'etat de chaque joueur et
+la vue specifique d'un joueur ou on voit tous les details de son etat (cartes devant lui)
+lorsque le joueur est sur sa propre vue il y a le haut de ses cartes qui apparait en bas de la fenetre, et elles
+remontent quand il passe sa souris dessus, sur la vue des autres joueurs pareil mais on ne voit que le dos des cartes (ou
+mise en evidence du nombre de carte de la main)
+quand on clique sur une carte elle s'agrandit et un texte avec la description s'affiche ( traduit ou non)
+en vue d'ensemble on a une vision des actions que le joueur entreprend : ses lancés de dés, les cartes qu'il joue
+globalement on voit la pioche au centre, les monstres disponible, la defausse
+
+possibilité en vue specifique de voir les details du dernier tour du joueur (et meme plus que le dernier?)
+possibilité d'explorer la pile de defausse a tout moment
+interfae faite en sorte d'eviter que des bonus soit oublié
+lorsque le joueur pose une carte il a les des qui sont mis en evidence devant lui mais il y a un bouton
+"renoncer a activer gratuitement l'effet de heros"
+pour lancer les des on peut les prendre avec la souris, les secouer ce qui fait un bruit de des remuer, et les lancer
+les des continuent leur chemin le long de la fenetre et rebondissent le long des bords pendant que leur face change constamment
+plus on lance fort et plus les des roule longtemps (courbe logarithmique)
+les des sont de la couleur du leader (pour les leader a couleurs c'est la couleur de la classe choisi pour le tour)
+mise en evidence du nombre de point d'action restant
+
+fenetre responsive
+
+possibilité de faire apparaitre un menu offrant au joueur la possibilité de quitter, etre remplacé par une ia
+si il se remplace par une ia le bouton se transforme en "reprendre ma place"
+si il quitte il est remplacé par une ia
+
+un joueur peut rejoindre une partie en cours a condition de remplacer une ia, celle de son choix
+
+mise en evidence des joueurs-ia, via un icone d'ordinateur ?
+
+chat ecrit
+
+apres chaque lancer de des ou trucage attendre 5s pour laisser le temps a un joueur de mettre un trucage
+lorsqu'il y a un lancer de des mettre en evidence la raison pour laquelle il y en a un
+ne bloque pas les actions du joueurs pendant ces 5s, l'effet peut etre en cours d'activation et si un trucage survient
+l'effet s'annule
+
+de meme pour les defis
