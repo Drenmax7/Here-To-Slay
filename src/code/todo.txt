@@ -1,3 +1,7 @@
+les clients envoient leurs actions au serveur qui les transmet au controlleur de la partie, celle ci traite l'information
+et renvoie alors au serveur les info changé. Le serveur les envoit alors a tous les clients pour actualiser leur vue
+
+
 page d'acceuil
 
 champs pour changer son nom : de base avec un nom aleatoire de hero du jeu

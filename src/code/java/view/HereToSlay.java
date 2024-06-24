@@ -1,8 +1,11 @@
 package code.java.view;
 
+import code.java.model.Server;
+
 public class HereToSlay {
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println("Hello world!");
+    public static void main(String[] args) {
+        Server server = new Server("192.168.43.167",666);
+        new Thread(server::run).start();
 
     }
 }
