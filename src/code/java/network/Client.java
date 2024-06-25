@@ -6,15 +6,50 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * Class that permit connexion to the server.
+ * Its purpose is to receive information about the game to update the game state on screen
+ * It also sends the user inputs to the server for him to proceed the player turn
+ *
+ * @see Server
+ * @see Packet
+ */
 public class Client {
     //Attributes
+
+    /**
+     * The state of the connexion
+     */
     private boolean close;
+
+    /**
+     * Ip address of the server
+     */
     private final String hostname;
+
+    /**
+     * Server's port
+     */
     private final int port;
+
+    /**
+     * The socket being use on the connexion
+     */
     private Socket socket;
+
+    /**
+     * The stream on which information can be put to be read by the server
+     */
     private ObjectOutputStream output;
 
     //Constructor
+
+    /**
+     * Create a new client object
+     *
+     * @param hostname ip address of the server
+     * @param port server's port
+     */
     public Client(String hostname, int port){
         close = false;
         this.hostname = hostname;
@@ -22,6 +57,12 @@ public class Client {
     }
 
     //Methods
+
+    /**
+     * Create a new connexion with the server
+     *
+     * @return if the connexion has been successful or not
+     */
     public boolean connexion(){
         try {
             Socket socket = new Socket(hostname, port);
@@ -44,6 +85,9 @@ public class Client {
         return false;
     }
 
+    /**
+     * Close the connexion with the server
+     */
     public void closeConnexion(){
         try {
             sendData(new Packet("closing"));
@@ -54,6 +98,13 @@ public class Client {
         }
     }
 
+    /**
+     * Listen to the input stream and fetch data that are sent on it
+     * Then process the data into the view
+     * Should be run in a thread
+     *
+     * @param input the input stream to be listened
+     */
     public void listen(ObjectInputStream input){
         while (!close){
             try {
@@ -75,6 +126,11 @@ public class Client {
         }
     }
 
+    /**
+     * Send the packet onto the output stream for the server to receive it
+     *
+     * @param packet the data to send
+     */
     public void sendData(Packet packet){
         if (output == null) {
             System.out.println("Cannot send data without properly connected to server first");
@@ -94,5 +150,10 @@ public class Client {
         }
     }
 
+    /**
+     * Return the connexion state
+     *
+     * @return the connexion state
+     */
     public boolean isConnected() {return !close;}
 }

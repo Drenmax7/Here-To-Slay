@@ -9,23 +9,54 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Class that permit connexion with clients.
+ * Its purpose is to send the game state to clients, so they can update their game view
+ * It also gets the user inputs to make a game turn
+ *
+ * @see Client
+ * @see Packet
+ */
 public class Server {
     //Attributes
+
     /**
      * Run until close is set to true
      */
     private boolean close;
-    private final int port;
+
     /**
-     * The stream on wich data sent by clients are put
+     * The port that is listened by the server
+     */
+    private final int port;
+
+    /**
+     * Socket on which incoming connexion are put and that permits the server to accept them
      */
     private ServerSocket serverSocket;
 
+    /**
+     * List of the client's socket currently connected
+     */
     private final ArrayList<Socket> connectedClient;
+
+    /**
+     * List of the client's output stream currently connected onto the server
+     */
     private final ArrayList<ObjectOutputStream> clientOutput;
+
+    /**
+     * Lock used to prevent multiple thread to delete sockets from the socket's list at the same time
+     */
     private final ReentrantLock lock;
 
     //Constructor
+
+    /**
+     * Create a new server, listening on the given port
+     *
+     * @param port the port on which the server is listening
+     */
     public Server(int port) {
         this.port = port;
         connectedClient = new ArrayList<>();
@@ -34,12 +65,16 @@ public class Server {
     }
 
     //Methods
+
+    /**
+     * Start the server, that consist of an infinite loop of accepting incoming connexion
+     * Should be run in a thread
+     */
     public void run() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             this.serverSocket = serverSocket;
             close = false;
             System.out.println("Server is running on port " + port);
-
 
             // As long as the server is open, it accepts connections
             while (!close) {
@@ -63,6 +98,9 @@ public class Server {
         }
     }
 
+    /**
+     * Stop the server and close all existing connexion
+     */
     public void stop() {
         close = true;
         try {
@@ -79,6 +117,13 @@ public class Server {
         }
     }
 
+    /**
+     * Listen to the input stream and fetch data that are sent on it
+     * Then process the data into the game controller
+     *
+     * @param input the input stream to be listened
+     * @param socket the socket used for the connexion with the client that is sending data on the input
+     */
     public void listen(Socket socket, ObjectInputStream input) {
         while (!socket.isClosed()){
             try {
@@ -118,6 +163,11 @@ public class Server {
         }
     }
 
+    /**
+     * Send the packet to every client currently connected
+     *
+     * @param packet the data to send
+     */
     public void sendData(Packet packet){
         //clientOutput.removeIf(Objects::isNull);
         for (ObjectOutputStream output : clientOutput){
