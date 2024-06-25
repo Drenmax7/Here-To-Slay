@@ -8,7 +8,7 @@ public class test {
         client.connexion();
 
         while (true){
-            client.sendData("je suis bien connecte");
+            client.sendData("client 2");
             System.out.println("message envoye");
             Thread.sleep(500);
         }

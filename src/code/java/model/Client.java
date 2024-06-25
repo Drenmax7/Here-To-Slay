@@ -25,14 +25,13 @@ public class Client {
     public void connexion(){
         try {
             Socket socket = new Socket(hostname, port);
-            ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-            ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
             System.out.println("Connected to server " + hostname);
-
             this.socket = socket;
-            this.output = output;
-            new Thread(() -> listen(input));
 
+            this.output = new ObjectOutputStream(socket.getOutputStream());;
+
+            ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
+            new Thread(() -> listen(input));
         }
         catch (UnknownHostException exception) {
             System.out.println("Server not found: " + exception.getMessage());
